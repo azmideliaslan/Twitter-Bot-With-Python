@@ -5,10 +5,10 @@ import tweepy
 access_token_producthunt = "dS0dChIGxjE17GL-9MClHorAntWimIdklS9EWYeWo48"
 
 # API anahtarları ve erişim belirteçlerinizi buraya girin
-consumer_key = "TTSp8LeRV8P6w2xYStRHqeFPs"
-consumer_secret = "roUMN1Qh6Duh15JvbJMYtoe0SY7kMXTYRiF5AsBBUnKpwvz0Rn"
-access_token = "879512133557420032-3aeJKPHUYIX1FG4ilzW7zJcLZXQP6cU"
-access_token_secret = "8IOy0mE027XHLoU9ZB5WBsGWCaMVsYfAOSJ0ZEWv202uf"
+consumer_key = "yUgnOqtKuk0RRaqI9K6VPxf95"
+consumer_secret = "kZozbEljHCnXB5GfmprQKwMiOKBrdqBmAd9ikFFbmliH3MiYw0"
+access_token = "1650782110272090113-vRIf8zp1JS0ow45xWyV1nhFnnt5JH8"
+access_token_secret = "wEDymbqQszxyE1q3lAChDMHadAx86l8oiVxkgiEJDuYUI"
 
 #twitter atturatize
 client = tweepy.Client(consumer_key=consumer_key,
@@ -24,14 +24,28 @@ query = """
     posts( first: 3 ){
       edges {
         node {
-          id
           name
           tagline
+          description
+          media {
+            videoUrl
+            
+          }
+          topics {
+            edges {
+              node {
+                name
+              }
+            }
+          }
           votesCount
+          url
         }
       }
     }
   }
+  
+
 
 """
 
@@ -45,9 +59,11 @@ if response.ok:
 
   # Process or use data
   for posts in data:
-    node = posts.get("node", {})
-    tweet = client.create_tweet(text=node.get("name"))
-    print(node.get("name"), node.get("tagline"), node.get("votesCount"))
+      node = posts.get("node", {})
+      tweet_text = f"{node.get('name')} - {node.get('tagline')} ({node.get('votesCount')} votes)"
+      media_url = None  # replace this with the URL of the image you want to attach to the tweet
+      tweet = client.create_tweet(text=tweet_text, media_ids=[media_url] if media_url else None)
+      print(tweet_text)
 else:
   # Handle error
   print("API request failed")
