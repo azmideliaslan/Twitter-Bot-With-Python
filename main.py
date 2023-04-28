@@ -1,5 +1,7 @@
 import requests
 import tweepy
+from googletrans import Translator
+import datetime
 
 # OAuth2 producthunt access token
 access_token_producthunt = "dS0dChIGxjE17GL-9MClHorAntWimIdklS9EWYeWo48"
@@ -27,10 +29,6 @@ query = """
           name
           tagline
           description
-          media {
-            videoUrl
-            
-          }
           topics {
             edges {
               node {
@@ -44,10 +42,15 @@ query = """
       }
     }
   }
-  
-
-
 """
+
+# Initialize Translator
+translator = Translator()
+# Şu anki tarih ve saat
+now = datetime.datetime.now()
+#Günü alıyorum
+day_name = now.strftime("%d %B")
+tr_day_name = translator.translate(day_name,dest='tr').text
 
 # API request producthunt
 response = requests.post(url, headers={"Authorization": f"Bearer {access_token_producthunt}"}, json={"query": query})
@@ -56,14 +59,33 @@ response = requests.post(url, headers={"Authorization": f"Bearer {access_token_p
 if response.ok:
   # Parse response data
   data = response.json().get("data", {}).get("posts", {}).get("edges", [])
+  fst = 1
 
-  # Process or use data
   for posts in data:
       node = posts.get("node", {})
-      tweet_text = f"{node.get('name')} - {node.get('tagline')} ({node.get('votesCount')} votes)"
-      media_url = None  # replace this with the URL of the image you want to attach to the tweet
-      tweet = client.create_tweet(text=tweet_text, media_ids=[media_url] if media_url else None)
-      print(tweet_text)
+      name = node.get("name")
+      tagline = node.get("tagline")
+      description = node.get("description")
+      topics = [topic.get("node", {}).get("name", "").replace(" ", "") for topic in node.get("topics", {}).get("edges", [])]
+      votes_count = node.get("votesCount")
+      url = node.get("url")
+
+      # Türkçe'ye çevirme
+      tr_tagline = translator.translate(tagline,dest='tr').text
+      tr_description = translator.translate(description,dest='tr').text
+      tr_topics = [translator.translate(topic,dest='tr').text.replace(" ", "") for topic in topics]
+      # Tweet oluşturma
+      first_tweet_content = f"{tr_day_name} En Popüler Dijital Ürünleri #{fst}\n"
+      tweet_text = f"{first_tweet_content}{name} - {tr_tagline}\n\n\n\n Oy sayısı: {votes_count} \n\n #{tr_topics[0]} #{tr_topics[1]} #{topics[0]} #{topics[1]} #ProductHunt \n\nDetaylar: {url}\n\n"
+      #Tanım eklenebilirse ekliyorum (bir twit 400 karakteri geçmemeli)
+      if len(tweet_text) + len(tr_description) <= 400:
+          tweet_text = f"{first_tweet_content}{name} - {tr_tagline} - {tr_description}\n\n\n\n Oy sayısı: {votes_count} \n\n #{tr_topics[0]} #{tr_topics[1]} #{topics[0]} #{topics[1]} #ProductHunt\n\nDetaylar: {url}\n\n"
+          print("sda  len(tweet_text)")
+      else:
+          print(len(tweet_text))
+      #tweet = client.create_tweet(text=tweet_text)
+      print({tweet_text})
+      fst = fst + 1
 else:
   # Handle error
   print("API request failed")
