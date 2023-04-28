@@ -76,10 +76,10 @@ if response.ok:
       tr_topics = [translator.translate(topic,dest='tr').text.replace(" ", "") for topic in topics]
       # Tweet oluşturma
       first_tweet_content = f"{tr_day_name} En Popüler Dijital Ürünleri #{fst}\n"
-      tweet_text = f"{first_tweet_content}{name} - {tr_tagline}\n\n\n\n Oy sayısı: {votes_count} \n\n #{tr_topics[0]} #{tr_topics[1]} #{topics[0]} #{topics[1]} #ProductHunt \n\nDetaylar: {url}\n\n"
+      tweet_text = f"{first_tweet_content}{name} - {tr_tagline}\n\n\n\n Oy sayısı: {votes_count} \n\n #{tr_topics[0]} #{tr_topics[1]} #{topics[0]} #{topics[1]} #ProductHunt \n\n{url}\n\n"
       #Tanım eklenebilirse ekliyorum (bir twit 400 karakteri geçmemeli)
       if len(tweet_text) + len(tr_description) <= 400:
-          tweet_text = f"{first_tweet_content}{name} - {tr_tagline} - {tr_description}\n\n\n\n Oy sayısı: {votes_count} \n\n #{tr_topics[0]} #{tr_topics[1]} #{topics[0]} #{topics[1]} #ProductHunt\n\nDetaylar: {url}\n\n"
+          tweet_text = f"{first_tweet_content}{name} - {tr_tagline} - {tr_description}\n\n\n\n Oy sayısı: {votes_count} \n\n #{tr_topics[0]} #{tr_topics[1]} #{topics[0]} #{topics[1]} #ProductHunt\n\n{url}\n\n"
           print("sda  len(tweet_text)")
       else:
           print(len(tweet_text))
