@@ -2,7 +2,7 @@ name: Daily Tweet
 
 on:
   schedule:
-    - cron: '53 12 * * *'
+    - cron: '0 13 * * *'
 
 jobs:
   run-script:
