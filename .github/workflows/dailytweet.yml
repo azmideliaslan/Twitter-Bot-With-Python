@@ -1,7 +1,7 @@
 name: daily-tweet
 on:
   schedule:
-    - cron: '50 16 * * *'
+    - cron: '0 20 * * *'
       timezone: Europe/Istanbul
   workflow_dispatch:
 
