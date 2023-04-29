@@ -83,7 +83,7 @@ if response.ok:
           print("sda  len(tweet_text)")
       else:
           print(len(tweet_text))
-      tweet = client.create_tweet(text=tweet_text)
+      #tweet = client.create_tweet(text=tweet_text)
       print({tweet_text})
       fst = fst + 1
 else:
