@@ -4,13 +4,13 @@ from googletrans import Translator
 import datetime
 
 # OAuth2 producthunt access token
-producthunt_access_token = "dS0dChIGxjE17GL-9MClHorAntWimIdklS9EWYeWo48"
+producthunt_access_token = "YOUR_PH_ACCESS_TOKEN"
 
 # API anahtarları ve erişim belirteçlerinizi buraya girin
-consumer_key = "yUgnOqtKuk0RRaqI9K6VPxf95"
-consumer_secret = "kZozbEljHCnXB5GfmprQKwMiOKBrdqBmAd9ikFFbmliH3MiYw0"
-access_token = "1650782110272090113-vRIf8zp1JS0ow45xWyV1nhFnnt5JH8"
-access_token_secret = "wEDymbqQszxyE1q3lAChDMHadAx86l8oiVxkgiEJDuYUI"
+consumer_key = "YOUR_COBSUMER_KEY"
+consumer_secret = "YOUR_CONSUMER_SECRET"
+access_token = "YOUR_ACCESS_TOKEN"
+access_token_secret = "YOUR_ACCESS_TOKEN_SECRET"
 
 #twitter atturatize
 client = tweepy.Client(consumer_key=consumer_key,
