@@ -1,5 +1,4 @@
 name: daily-tweet
-
 on:
   schedule:
     - cron: '50 16 * * *'
