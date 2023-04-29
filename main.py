@@ -3,6 +3,7 @@ import tweepy
 from googletrans import Translator
 import datetime
 import os
+import time
 
 consumer_key = os.environ.get("CONSUMER_KEY")
 consumer_secret = os.environ.get("CONSUMER_SECRET")
@@ -84,6 +85,7 @@ if response.ok:
       tweet = client.create_tweet(text=tweet_text)
       print({tweet_text})
       fst = fst + 1
+      time.sleep(60)
 else:
   # Handle error
   print("API request failed")
