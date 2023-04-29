@@ -1,9 +1,11 @@
-name: Daily Tweet
+name: daily-tweet
+
 on:
   schedule:
-    - cron: '*/2 * * * *'
+    - cron: '*/5 * * * *'
       timezone: Europe/Istanbul
   workflow_dispatch:
+
 jobs:
   run-script:
     runs-on: ubuntu-latest
