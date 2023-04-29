@@ -3,6 +3,7 @@ name: Daily Tweet
 on:
   schedule:
     - cron: '10 13 * * *'
+  workflow_dispatch:
 
 jobs:
   run-script:
