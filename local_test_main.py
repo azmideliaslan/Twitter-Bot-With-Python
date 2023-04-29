@@ -2,13 +2,15 @@ import requests
 import tweepy
 from googletrans import Translator
 import datetime
-import os
 
-consumer_key = os.environ.get("CONSUMER_KEY")
-consumer_secret = os.environ.get("CONSUMER_SECRET")
-access_token = os.environ.get("ACCESS_TOKEN")
-access_token_secret = os.environ.get("ACCESS_TOKEN_SECRET")
-producthunt_access_token = os.environ.get("PRODUCTHUNT_ACCESS_TOKEN")
+# OAuth2 producthunt access token
+producthunt_access_token = "dS0dChIGxjE17GL-9MClHorAntWimIdklS9EWYeWo48"
+
+# API anahtarları ve erişim belirteçlerinizi buraya girin
+consumer_key = "yUgnOqtKuk0RRaqI9K6VPxf95"
+consumer_secret = "kZozbEljHCnXB5GfmprQKwMiOKBrdqBmAd9ikFFbmliH3MiYw0"
+access_token = "1650782110272090113-vRIf8zp1JS0ow45xWyV1nhFnnt5JH8"
+access_token_secret = "wEDymbqQszxyE1q3lAChDMHadAx86l8oiVxkgiEJDuYUI"
 
 #twitter atturatize
 client = tweepy.Client(consumer_key=consumer_key,
